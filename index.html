@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Morgane Marlow</title>
+  <meta name="description" content="Strategist, operator, and COO of AI Central Media. Based in London." />
+  <meta property="og:title" content="Morgane Marlow" />
+  <meta property="og:description" content="Strategist, operator, and COO of AI Central Media. Based in London." />
+  <meta property="og:image" content="/img/og-image.jpg" />
+
+  <!-- Neue Montreal via Fontshare -->
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=neue-montreal@300,400,500&display=swap" rel="stylesheet" />
+
+  <style>
+    @font-face {
+      font-family: 'Relationship of Melodrame';
+      src: url('/fonts/Relationship of melodrame.woff2') format('woff2');
+      font-weight: normal;
+      font-style:  normal;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'Relationship of Melodrame';
+      src: url('/fonts/Relationship of melodrame.woff2') format('woff2');
+      font-weight: normal;
+      font-style:  italic;
+      font-display: block;
+    }
+    em, i { font-style: oblique 12deg !important; }
+
+    /* ══════════════════════════════════════════
+       TOKENS
+    ══════════════════════════════════════════ */
+    :root {
+      --color-honeydew:    #F8FFED;
+      --color-lemon-lime:  #D3D858;
+      --color-sweet-peony: #CE75A1;
+      --color-icy-blue:    #B5DCFD;
+      --color-olive-leaf:  #585B0A;
+      --color-olive-dark:  #2B2D00;
+      --color-cream:       #EFF9DC;
+
+      --font-display: 'Relationship of Melodrame', Georgia, serif;
+      --font-body:    'Neue Montreal', system-ui, sans-serif;
+
+      --radius-pill: 100px;
+      --radius-card: 20px;
+
+      --section-padding-y: 120px;
+      --section-padding-x: 80px;
+      --container-max:     1280px;
+    }
+
+    /* ══════════════════════════════════════════
+       RESET & BASE
+    ══════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html  { scroll-behavior: smooth; }
+    body  {
+      font-family: var(--font-body);
+      color: var(--color-olive-dark);
+      background: var(--color-honeydew);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      text-transform: lowercase;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+
+    h1, h2, h3,
+    .text-display, .text-h2, .text-h3,
+    .stat-card__number, .footer-wordmark,
+    .work-tile__title, .timeline-item__org, .nav-logo {
+      text-transform: uppercase;
+    }
+    .hero-title { text-transform: uppercase; }
+
+    /* ══════════════════════════════════════════
+       TYPE SCALE
+    ══════════════════════════════════════════ */
+    .text-display {
+      font-family: var(--font-display);
+      font-size:   clamp(48px, 7vw, 88px);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+    }
+    .text-h2 {
+      font-family: var(--font-display);
+      font-size:   clamp(32px, 4vw, 52px);
+      font-weight: 400;
+      line-height: 1.15;
+    }
+    .text-h3 {
+      font-family: var(--font-display);
+      font-size:   clamp(22px, 2.5vw, 32px);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .text-body  { font-family: var(--font-body); font-size: 16px; font-weight: 400; line-height: 1.7; }
+    .text-label { font-family: var(--font-body); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; }
+
+    /* ══════════════════════════════════════════
+       BUTTONS
+    ══════════════════════════════════════════ */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      cursor: pointer; border: none;
+      font-family: var(--font-body); font-weight: 600; font-size: 14px;
+      padding: 14px 28px; border-radius: var(--radius-pill);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+      text-transform: lowercase;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary  { background: var(--color-lemon-lime); color: var(--color-olive-leaf); }
+    .btn-primary:hover  { transform: scale(1.03); box-shadow: 0 4px 20px rgba(211,216,88,0.4); }
+    .btn-secondary { background: transparent; color: var(--color-olive-dark); border: 1.5px solid var(--color-olive-dark); padding: 12px 26px; }
+    .btn-secondary:hover { background: var(--color-olive-dark); color: var(--color-lemon-lime); }
+    .btn-outline-white { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.55); padding: 12px 26px; }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.12); }
+
+    /* ══════════════════════════════════════════
+       SCROLL REVEAL
+    ══════════════════════════════════════════ */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+
+    /* ══════════════════════════════════════════
+       NAV
+    ══════════════════════════════════════════ */
+    .site-nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--section-padding-x); height: 72px;
+      background: var(--color-honeydew);
+      border-bottom: 0.5px solid transparent;
+      transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+    }
+    .site-nav.nav--scrolled {
+      background: rgba(248,255,237,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom-color: rgba(0,0,0,0.08);
+    }
+    .nav-logo { font-family: var(--font-display); font-size: 20px; font-weight: normal; color: var(--color-olive-leaf); text-transform: uppercase; }
+    .nav-logo strong { font-weight: normal; -webkit-text-stroke: 0.6px var(--color-olive-leaf); text-stroke: 0.6px var(--color-olive-leaf); }
+    .nav-pills { display: flex; align-items: center; gap: 8px; }
+    .nav-pill {
+      padding: 8px 18px; border-radius: var(--radius-pill);
+      font-family: var(--font-body); font-size: 13px; font-weight: 500;
+      border: 1.5px solid; cursor: pointer; transition: all 0.15s ease;
+      white-space: nowrap; text-transform: lowercase;
+    }
+    .nav-pill:hover { transform: scale(1.04); }
+    .nav-pill--outline { border-color: var(--color-olive-leaf); color: var(--color-olive-leaf); background: transparent; }
+    .nav-pill--green   { background: var(--color-sweet-peony); color: #fff; border-color: var(--color-sweet-peony); }
+    .nav-pill--blue    { background: var(--color-icy-blue); color: var(--color-olive-dark); border-color: var(--color-icy-blue); }
+    .nav-mobile-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .nav-mobile-toggle span { display: block; width: 22px; height: 2px; background: var(--color-olive-dark); border-radius: 2px; }
+
+    /* ══════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════ */
+    .hero {
+      background: var(--color-olive-leaf);
+      padding: 100px var(--section-padding-x);
+      position: relative; overflow: hidden;
+    }
+    .hero-inner {
+      max-width: var(--container-max); margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .hero__text { position: relative; z-index: 2; }
+    .hero__text .text-label { color: rgba(255,255,255,0.55); display: block; margin-bottom: 20px; text-transform: lowercase; }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 7vw, 88px);
+      font-weight: 700; line-height: 1.0; letter-spacing: -0.02em;
+      color: #fff; margin-bottom: 28px;
+    }
+    .hero-tagline {
+      font-family: var(--font-body); font-size: 17px; line-height: 1.7;
+      color: rgba(255,255,255,0.8); max-width: 440px; margin-bottom: 40px;
+      text-transform: lowercase;
+    }
+    .hero__cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero__photo {
+      display: flex; justify-content: flex-end; align-items: flex-end;
+      position: relative;
+    }
+    .hero__photo img {
+      width: 100%; max-width: 440px; height: auto;
+      object-fit: contain; object-position: bottom;
+      border-radius: 20px 20px 0 0;
+    }
+    .hero__photo-placeholder {
+      width: 400px; height: 480px; border-radius: 20px 20px 0 0;
+      background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-body); font-size: 13px;
+      color: rgba(255,255,255,0.3); text-align: center; line-height: 1.6;
+    }
+
+    /* ══════════════════════════════════════════
+       ABOUT & CAREER
+    ══════════════════════════════════════════ */
+    .about-career {
+      background: var(--color-honeydew);
+      padding: var(--section-padding-y) var(--section-padding-x);
+    }
+    .about-career-inner {
+      max-width: var(--container-max); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+    }
+    .about-career__bio .text-label { color: var(--color-olive-leaf); display: block; margin-bottom: 16px; }
+    .about-career__bio .text-h3 { margin-bottom: 20px; }
+    .about-career__bio .text-body + .text-body { margin-top: 16px; }
+
+    /* Timeline */
+    .timeline-section .text-label { color: #aaa; display: block; margin-bottom: 24px; }
+    .timeline { display: flex; flex-direction: column; position: relative; }
+    .timeline::before {
+      content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px;
+      width: 1px; background: var(--color-icy-blue);
+    }
+    .timeline-item { display: flex; gap: 20px; padding-bottom: 28px; position: relative; }
+    .timeline-item::before {
+      content: ''; width: 15px; height: 15px; border-radius: 50%;
+      background: var(--color-olive-leaf); border: 2px solid var(--color-honeydew);
+      flex-shrink: 0; margin-top: 4px; position: relative; z-index: 1;
+    }
+    .timeline-item__org { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--color-olive-dark); margin: 0 0 2px; }
+    .timeline-item__role { font-family: var(--font-body); font-size: 14px; color: var(--color-olive-leaf); margin: 0 0 2px; text-transform: lowercase; }
+    .timeline-item__years { font-family: var(--font-body); font-size: 12px; color: #888; margin: 0; text-transform: lowercase; }
+    .timeline-item:hover .timeline-item__org { color: var(--color-olive-leaf); transition: color 0.15s; }
+
+    /* Education strip */
+    .edu-strip {
+      margin-top: 36px; padding-top: 28px;
+      border-top: 1px solid rgba(88,91,10,0.15);
+    }
+    .edu-strip .text-label { color: #aaa; margin-bottom: 16px; display: block; }
+    .edu-item { margin-bottom: 14px; }
+    .edu-item__school { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--color-olive-dark); }
+    .edu-item__degree { font-family: var(--font-body); font-size: 13px; color: var(--color-olive-leaf); text-transform: lowercase; margin-top: 2px; }
+
+    /* ══════════════════════════════════════════
+       WORK WITH ME
+    ══════════════════════════════════════════ */
+    .work-with-me { background: var(--color-icy-blue); padding: var(--section-padding-y) var(--section-padding-x); }
+    .work-with-me-inner { max-width: var(--container-max); margin: 0 auto; }
+    .work-header { text-align: center; margin-bottom: 56px; }
+    .work-header .text-label { color: var(--color-olive-leaf); display: block; margin-bottom: 12px; }
+    .work-header .text-h2 { margin-bottom: 16px; }
+    .work-header .text-body { max-width: 480px; margin: 0 auto; color: var(--color-olive-dark); }
+    .work-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .work-tile {
+      background: rgba(255,255,255,0.55); border: 1.5px solid rgba(88,91,10,0.15);
+      border-radius: var(--radius-card); padding: 36px 32px;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .work-tile:hover { background: rgba(255,255,255,0.85); border-color: var(--color-olive-leaf); transform: translateY(-4px); }
+    .work-tile__icon { font-size: 28px; margin-bottom: 4px; }
+    .work-tile__title { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--color-olive-dark); }
+    .work-tile__desc { font-family: var(--font-body); font-size: 14px; color: #555; line-height: 1.65; flex: 1; text-transform: lowercase; }
+    .work-tile__cta { font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--color-olive-leaf); align-self: flex-start; margin-top: auto; text-transform: lowercase; }
+    .work-tile__cta:hover { text-decoration: underline; }
+    .work-footer { text-align: center; margin-top: 48px; }
+    .work-footer-note { font-family: var(--font-display); font-size: 18px; color: var(--color-olive-leaf); margin-bottom: 16px; display: block; }
+
+    /* ══════════════════════════════════════════
+       AI CENTRAL MEDIA
+    ══════════════════════════════════════════ */
+    .ai-central { background: var(--color-olive-dark); padding: var(--section-padding-y) var(--section-padding-x); }
+    .ai-central-inner {
+      max-width: var(--container-max); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .ai-central__left .text-label { color: rgba(255,255,255,0.4); display: block; margin-bottom: 16px; }
+    .ai-central__left .text-h3 { color: #fff; margin-bottom: 20px; }
+    .ai-central__left .text-body { color: rgba(255,255,255,0.72); max-width: 380px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
+    .stat-card {
+      background: var(--color-olive-leaf); border-radius: var(--radius-card);
+      padding: 28px 24px; display: flex; flex-direction: column; gap: 6px;
+      transition: transform 0.2s ease;
+    }
+    .stat-card:hover { transform: translateY(-4px); }
+    .stat-card__number { font-family: var(--font-display); font-size: 42px; font-weight: 700; color: var(--color-lemon-lime); line-height: 1; }
+    .stat-card__label  { font-family: var(--font-body); font-size: 13px; color: rgba(255,255,255,0.7); text-transform: lowercase; }
+
+    /* ══════════════════════════════════════════
+       PHOTO STRIP
+    ══════════════════════════════════════════ */
+    .photo-strip { display: grid; grid-template-columns: repeat(6, 1fr); width: 100%; overflow: hidden; }
+    .photo-strip-item { height: 260px; overflow: hidden; }
+    .photo-strip-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .photo-strip-item:hover img { transform: scale(1.05); }
+    .photo-strip-placeholder {
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-body); font-size: 11px;
+      color: rgba(255,255,255,0.4); letter-spacing: 0.06em; text-transform: lowercase;
+    }
+
+    /* ══════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════ */
+    footer { background: var(--color-cream); padding-top: 80px; overflow: hidden; }
+    .footer__nav {
+      display: grid; grid-template-columns: repeat(4, auto); justify-content: start;
+      gap: 60px; padding: 0 var(--section-padding-x) 60px;
+      max-width: var(--container-max); margin: 0 auto;
+    }
+    .footer__col-title { font-family: var(--font-body); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: #999; margin-bottom: 14px; text-transform: lowercase; }
+    .footer__col a { display: block; font-size: 14px; color: var(--color-olive-dark); margin-bottom: 10px; transition: color 0.15s; text-transform: lowercase; }
+    .footer__col a:hover { color: var(--color-olive-leaf); }
+    .footer-wordmark {
+      font-family: var(--font-display); font-size: clamp(64px, 11vw, 140px); font-weight: 700;
+      color: var(--color-olive-leaf); line-height: 0.9; letter-spacing: -0.03em;
+      padding: 0 var(--section-padding-x); white-space: nowrap; overflow: hidden; text-transform: uppercase;
+    }
+    .footer-wordmark em { margin: 0 0.1em; }
+    .footer-tagline { font-family: var(--font-body); font-size: 14px; color: #aaa; padding: 0 var(--section-padding-x) 40px; margin-top: 8px; display: block; text-transform: lowercase; }
+    .footer__strip {
+      background: var(--color-olive-leaf); color: rgba(255,255,255,0.7);
+      font-size: 12px; font-family: var(--font-body);
+      padding: 20px var(--section-padding-x);
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 60px; text-transform: lowercase;
+    }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      :root { --section-padding-y: 72px; --section-padding-x: 24px; }
+      .site-nav { padding: 0 24px; height: 60px; }
+      .nav-pills { display: none; }
+      .nav-mobile-toggle { display: flex; }
+      .hero { padding: 72px 24px 60px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero__photo { justify-content: center; }
+      .hero__photo-placeholder { width: 100%; height: 260px; }
+      .about-career-inner { grid-template-columns: 1fr; gap: 48px; }
+      .ai-central-inner   { grid-template-columns: 1fr; gap: 48px; }
+      .work-tiles { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .photo-strip { grid-template-columns: repeat(3, 1fr); }
+      .photo-strip-item:nth-child(n+4) { display: none; }
+      .photo-strip-item { height: 180px; }
+      .footer__nav { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-wordmark { font-size: 17vw; }
+      .footer__strip { flex-direction: column; gap: 6px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav" id="site-nav">
+    <a href="/" class="nav-logo">Morgane <strong>Marlow</strong></a>
+    <div class="nav-pills">
+      <a href="#about"  class="nav-pill nav-pill--outline">about</a>
+      <a href="#career" class="nav-pill nav-pill--outline">career</a>
+      <a href="#work"   class="nav-pill nav-pill--blue">work with me</a>
+      <a href="https://butwhy.com" target="_blank" rel="noopener" class="nav-pill nav-pill--green">but, why? ↗</a>
+    </div>
+    <a href="mailto:hello@morganemarlow.com" class="btn btn-primary">get in touch →</a>
+    <button class="nav-mobile-toggle" aria-label="Menu" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="about">
+    <div class="hero-inner">
+      <div class="hero__text">
+        <span class="text-label reveal">strategist · operator · builder</span>
+        <h1 class="hero-title reveal reveal-d1">Morgane<br>Marlow</h1>
+        <p class="hero-tagline reveal reveal-d2">
+          i partner with leadership teams to navigate complexity and move priorities forward — especially where policy, partnerships, and cross-border growth intersect. with 8+ years across government, tech-enabled businesses, and regulated industries, i bring structure to ambiguity.
+        </p>
+        <p class="hero-tagline reveal reveal-d2" style="margin-top:-24px;">
+          kellogg mba. currently coo of ai central media. london-based, perpetually curious.
+        </p>
+        <div class="hero__cta reveal reveal-d3">
+          <a href="#work" class="btn btn-primary">work with me →</a>
+          <a href="mailto:hello@morganemarlow.com" class="btn btn-outline-white">get in touch</a>
+        </div>
+      </div>
+      <div class="hero__photo reveal reveal-d2">
+        <!--
+          Replace with: <img src="/img/morgane-hero.png" alt="Morgane Marlow" />
+          (PNG with transparent background, portrait orientation)
+        -->
+        <div class="hero__photo-placeholder">photo<br>(png cutout<br>goes here)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT & CAREER -->
+  <section class="about-career" id="career">
+    <div class="about-career-inner">
+
+      <div class="about-career__bio reveal">
+        <span class="text-label">background</span>
+        <h2 class="text-h3" style="margin-top:16px; margin-bottom:20px;">chief of staff-style strategist &amp; connector.</h2>
+        <p class="text-body">
+          london-based (mostly). 30-something. my career has taken me from financial services in scottsdale to the halls of whitehall, from hedge fund operations in chicago to building a media company from scratch. i've spent time in the places where policy meets business, and i understand how to work both sides.
+        </p>
+        <p class="text-body" style="margin-top:16px;">
+          i left the us after 27 years to return to the uk, and somewhere between the jet lag and the job applications, my partner convinced me to build something of my own. now i'm coo of ai central media — and writing a newsletter called <em>but, why?</em> on the side, because curiosity doesn't pay rent but it does keep life interesting.
+        </p>
+
+        <div class="edu-strip">
+          <span class="text-label">education</span>
+          <div class="edu-item">
+            <p class="edu-item__school">Kellogg School of Management</p>
+            <p class="edu-item__degree">mba · northwestern university</p>
+          </div>
+          <div class="edu-item">
+            <p class="edu-item__school">University of Edinburgh</p>
+            <p class="edu-item__degree">bsc · international business</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-section reveal reveal-d2">
+        <span class="text-label">experience</span>
+        <div class="timeline" style="margin-top:24px;">
+          <div class="timeline-item">
+            <div class="timeline-item__content">
+              <p class="timeline-item__org">AI Central Media</p>
+              <p class="timeline-item__role">coo &amp; co-founder</p>
+              <p class="timeline-item__years">2024 – present · london</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-item__content">
+              <p class="timeline-item__org">UK Government — DBT</p>
+              <p class="timeline-item__role">senior trade &amp; investment officer</p>
+              <p class="timeline-item__years">2022 – 2025 · chicago</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-item__content">
+              <p class="timeline-item__org">Northern Trust</p>
+              <p class="timeline-item__role">senior consultant, hedge fund services</p>
+              <p class="timeline-item__years">2018 – 2021 · chicago</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-item__content">
+              <p class="timeline-item__org">The Vanguard Group</p>
+              <p class="timeline-item__role">client relationship associate</p>
+              <p class="timeline-item__years">2014 – 2015 · scottsdale</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WORK WITH ME -->
+  <section class="work-with-me" id="work">
+    <div class="work-with-me-inner">
+      <div class="work-header reveal">
+        <span class="text-label">opportunities</span>
+        <h2 class="text-h2" style="margin-top:12px; margin-bottom:16px;">let's work together.</h2>
+        <p class="text-body">a few ways i currently work with people and organisations. more detail coming — in the meantime, just get in touch.</p>
+      </div>
+      <div class="work-tiles">
+        <div class="work-tile reveal reveal-d1">
+          <div class="work-tile__icon">🧭</div>
+          <h3 class="work-tile__title">advisory &amp; consulting</h3>
+          <p class="work-tile__desc">strategy, growth, cross-border expansion. details coming soon.</p>
+          <a href="mailto:hello@morganemarlow.com" class="work-tile__cta">let's talk →</a>
+        </div>
+        <div class="work-tile reveal reveal-d2">
+          <div class="work-tile__icon">🎤</div>
+          <h3 class="work-tile__title">speaking</h3>
+          <p class="work-tile__desc">ai, media, operator strategy, building in public. details coming soon.</p>
+          <a href="mailto:hello@morganemarlow.com" class="work-tile__cta">book me →</a>
+        </div>
+        <div class="work-tile reveal reveal-d3">
+          <div class="work-tile__icon">🤝</div>
+          <h3 class="work-tile__title">partnerships &amp; media</h3>
+          <p class="work-tile__desc">newsletter partnerships and brand collaborations. details coming soon.</p>
+          <a href="mailto:hello@morganemarlow.com" class="work-tile__cta">get in touch →</a>
+        </div>
+      </div>
+      <div class="work-footer reveal">
+        <em class="work-footer-note">not sure which fits? just say hello.</em>
+        <a href="mailto:hello@morganemarlow.com" class="btn btn-secondary">hello@morganemarlow.com →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI CENTRAL MEDIA -->
+  <section class="ai-central">
+    <div class="ai-central-inner">
+      <div class="ai-central__left reveal">
+        <span class="text-label">currently building</span>
+        <h2 class="text-h3" style="margin-top:16px;">AI Central Media</h2>
+        <p class="text-body" style="margin-top:20px;">
+          the leading newsletter and media company covering ai for business leaders and operators. co-founded with alex fiore. seed-stage, london-based.
+        </p>
+        <a href="https://aicentral.com" target="_blank" rel="noopener noreferrer"
+           class="btn btn-outline-white" style="margin-top:28px;">visit ai central media ↗</a>
+      </div>
+      <div class="ai-central__stats reveal reveal-d2">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-card__number">300K+</span>
+            <span class="stat-card__label">combined readers</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__number">178K</span>
+            <span class="stat-card__label">linkedin subscribers</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__number">75K+</span>
+            <span class="stat-card__label">newsletter subscribers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO STRIP -->
+  <div class="photo-strip" aria-label="photo gallery">
+    <div class="photo-strip-item" style="background:#585B0A;"><div class="photo-strip-placeholder">photo 1</div></div>
+    <div class="photo-strip-item" style="background:#CE75A1;"><div class="photo-strip-placeholder">photo 2</div></div>
+    <div class="photo-strip-item" style="background:#D3D858;"><div class="photo-strip-placeholder">photo 3</div></div>
+    <div class="photo-strip-item" style="background:#B5DCFD;"><div class="photo-strip-placeholder">photo 4</div></div>
+    <div class="photo-strip-item" style="background:#2B2D00;"><div class="photo-strip-placeholder">photo 5</div></div>
+    <div class="photo-strip-item" style="background:#EFF9DC;"><div class="photo-strip-placeholder">photo 6</div></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer__nav">
+      <div class="footer__col">
+        <p class="footer__col-title">navigate</p>
+        <a href="#about">about</a>
+        <a href="#career">career</a>
+        <a href="#work">work with me</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">building</p>
+        <a href="https://aicentral.com" target="_blank" rel="noopener noreferrer">ai central media ↗</a>
+        <a href="https://butwhy.com" target="_blank" rel="noopener noreferrer">but, why? newsletter ↗</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">connect</p>
+        <a href="https://linkedin.com/in/morgane-marlow" target="_blank" rel="noopener noreferrer">linkedin ↗</a>
+        <a href="mailto:hello@morganemarlow.com">email</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">newsletter</p>
+        <a href="https://butwhy.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size:13px; padding:10px 20px;">but, why? ↗</a>
+      </div>
+    </div>
+    <div class="footer-wordmark">Morgane <em>Marlow</em></div>
+    <span class="footer-tagline">strategist · operator · builder</span>
+    <div class="footer__strip">
+      <p>© 2026 morgane marlow. all rights reserved.</p>
+      <p>london — milan — always online</p>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('is-visible'), 80 + i * 80);
+    });
+
+    const nav = document.getElementById('site-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('nav--scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    function toggleMobileNav() {
+      const pills = document.querySelector('.nav-pills');
+      const isOpen = pills.style.display === 'flex';
+      pills.style.cssText = isOpen ? '' :
+        'display:flex;flex-direction:column;position:absolute;top:60px;left:0;right:0;' +
+        'background:var(--color-honeydew);padding:20px 24px;gap:10px;' +
+        'border-bottom:1px solid rgba(0,0,0,0.07);z-index:99;';
+    }
+  </script>
+
+</body>
+</html>
