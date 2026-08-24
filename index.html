@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,38 +19,50 @@
       src: url('/fonts/Relationship of melodrame.woff2') format('woff2');
       font-weight: normal;
       font-style:  normal;
-      font-display: block;
+      font-display: swap;
     }
-    @font-face {
-      font-family: 'Relationship of Melodrame';
-      src: url('/fonts/Relationship of melodrame.woff2') format('woff2');
-      font-weight: normal;
-      font-style:  italic;
-      font-display: block;
-    }
-    em, i { font-style: oblique 12deg !important; }
 
     /* ══════════════════════════════════════════
        TOKENS
     ══════════════════════════════════════════ */
     :root {
-      --color-honeydew:    #F8FFED;
-      --color-lemon-lime:  #D3D858;
-      --color-sweet-peony: #CE75A1;
-      --color-icy-blue:    #B5DCFD;
-      --color-olive-leaf:  #585B0A;
-      --color-olive-dark:  #2B2D00;
-      --color-cream:       #EFF9DC;
+      /* ── Grounds — there are exactly two ── */
+      --ground:              #F8FFED;   /* the one light */
+      --ground-dark:         #2B2D00;   /* the one dark  */
 
+      /* ── Ink on light ── */
+      --ink:                 #2B2D00;   /* 13.88:1 — body, headings   */
+      --ink-mid:             #585B0A;   /*  7.04:1 — secondary, links */
+      --ink-muted:           #72755B;   /*  4.65:1 — labels, metadata */
+
+      /* ── Ink on dark ── */
+      --ink-on-dark:         #F8FFED;   /* 13.88:1 */
+      --ink-on-dark-muted:   #AAAF93;   /*  6.27:1 */
+
+      /* ── Accent — one colour, one job ── */
+      --accent:              #D3D858;
+      --accent-ink:          #3F4207;   /*  6.89:1 on --accent */
+
+      /* ── The thread — peony, used on ONE element ── */
+      --thread:              #A65E82;   /*  4.51:1 on --ground      */
+      --thread-on-dark:      #B5859D;   /*  4.61:1 on --ground-dark */
+
+      /* ── Surfaces & rules ── */
+      --surface-on-dark:     #56590A;
+      --rule:                rgba(43, 45, 0, .16);
+      --rule-on-dark:        #74780D;   /*  3.00:1 vs --ground-dark */
+
+      /* ── Type ── */
       --font-display: 'Relationship of Melodrame', Georgia, serif;
       --font-body:    'Neue Montreal', system-ui, sans-serif;
 
+      /* ── Geometry ── */
       --radius-pill: 100px;
-      --radius-card: 20px;
+      --radius-card: 16px;
 
-      --section-padding-y: 120px;
+      --section-padding-y: 128px;
       --section-padding-x: 80px;
-      --container-max:     1280px;
+      --container-max:     1200px;
     }
 
     /* ══════════════════════════════════════════
@@ -60,47 +72,47 @@
     html  { scroll-behavior: smooth; }
     body  {
       font-family: var(--font-body);
-      color: var(--color-olive-dark);
-      background: var(--color-honeydew);
+      color: var(--ink);
+      background: var(--ground);
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
-      text-transform: lowercase;
     }
     a { color: inherit; text-decoration: none; }
     img { display: block; }
 
-    h1, h2, h3,
-    .text-display, .text-h2, .text-h3,
-    .stat-card__number, .footer-wordmark,
-    .work-tile__title, .timeline-item__org, .nav-logo {
+    /* Uppercase applies only to elements still using the display face */
+    .text-display, .hero-title, .text-h2,
+    .stat-card__number, .footer-wordmark {
       text-transform: uppercase;
     }
-    .hero-title { text-transform: uppercase; }
 
     /* ══════════════════════════════════════════
-       TYPE SCALE
+       TYPE SCALE — 96 · 64 · 44 · 28 · 22 · 18 · 16 · 14 · 12
     ══════════════════════════════════════════ */
     .text-display {
       font-family: var(--font-display);
       font-size:   clamp(48px, 7vw, 88px);
-      font-weight: 700;
+      font-weight: 400;
       line-height: 1.0;
       letter-spacing: -0.02em;
     }
     .text-h2 {
       font-family: var(--font-display);
-      font-size:   clamp(32px, 4vw, 52px);
+      font-size:   clamp(44px, 5vw, 60px);
       font-weight: 400;
       line-height: 1.15;
     }
     .text-h3 {
-      font-family: var(--font-display);
-      font-size:   clamp(22px, 2.5vw, 32px);
-      font-weight: 700;
-      line-height: 1.2;
+      font-family: var(--font-body);
+      font-size:   clamp(22px, 2.5vw, 28px);
+      font-weight: 500;
+      line-height: 1.3;
     }
     .text-body  { font-family: var(--font-body); font-size: 16px; font-weight: 400; line-height: 1.7; }
-    .text-label { font-family: var(--font-body); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; }
+    .text-label {
+      font-family: var(--font-body); font-size: 12px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: lowercase;
+    }
 
     /* ══════════════════════════════════════════
        BUTTONS
@@ -110,16 +122,15 @@
       cursor: pointer; border: none;
       font-family: var(--font-body); font-weight: 600; font-size: 14px;
       padding: 14px 28px; border-radius: var(--radius-pill);
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+      transition: box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
       text-transform: lowercase;
     }
-    .btn:active { transform: scale(0.97); }
-    .btn-primary  { background: var(--color-lemon-lime); color: var(--color-olive-leaf); }
-    .btn-primary:hover  { transform: scale(1.03); box-shadow: 0 4px 20px rgba(211,216,88,0.4); }
-    .btn-secondary { background: transparent; color: var(--color-olive-dark); border: 1.5px solid var(--color-olive-dark); padding: 12px 26px; }
-    .btn-secondary:hover { background: var(--color-olive-dark); color: var(--color-lemon-lime); }
-    .btn-outline-white { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.55); padding: 12px 26px; }
-    .btn-outline-white:hover { background: rgba(255,255,255,0.12); }
+    .btn-primary  { background: var(--accent); color: var(--accent-ink); }
+    .btn-primary:hover { box-shadow: 0 4px 20px rgba(211,216,88,0.4); }
+    .btn-secondary { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); padding: 12px 26px; }
+    .btn-secondary:hover { background: var(--ink); color: var(--ground); }
+    .btn-on-dark { background: transparent; color: var(--ink-on-dark); border: 1.5px solid var(--ink-on-dark); padding: 12px 26px; }
+    .btn-on-dark:hover { background: var(--ink-on-dark); color: var(--ground-dark); }
 
     /* ══════════════════════════════════════════
        SCROLL REVEAL
@@ -130,14 +141,22 @@
     .reveal-d2 { transition-delay: 0.2s; }
     .reveal-d3 { transition-delay: 0.3s; }
 
+    /* If the script never runs, the page must not be blank */
+    .no-js .reveal { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      * { animation: none !important; transition: none !important; }
+    }
+
     /* ══════════════════════════════════════════
        NAV
     ══════════════════════════════════════════ */
     .site-nav {
       position: sticky; top: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 var(--section-padding-x); height: 72px;
-      background: var(--color-honeydew);
+      padding: 0 var(--section-padding-x); min-height: 72px; height: auto;
+      background: var(--ground);
       border-bottom: 0.5px solid transparent;
       transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
     }
@@ -145,223 +164,240 @@
       background: rgba(248,255,237,0.88);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border-bottom-color: rgba(0,0,0,0.08);
+      border-bottom-color: var(--rule);
     }
-    .nav-logo { font-family: var(--font-display); font-size: 20px; font-weight: normal; color: var(--color-olive-leaf); text-transform: uppercase; }
-    .nav-logo strong { font-weight: normal; -webkit-text-stroke: 0.6px var(--color-olive-leaf); text-stroke: 0.6px var(--color-olive-leaf); }
-    .nav-pills { display: flex; align-items: center; gap: 8px; }
-    .nav-pill {
-      padding: 8px 18px; border-radius: var(--radius-pill);
-      font-family: var(--font-body); font-size: 13px; font-weight: 500;
-      border: 1.5px solid; cursor: pointer; transition: all 0.15s ease;
-      white-space: nowrap; text-transform: lowercase;
+    .nav-logo {
+      font-family: var(--font-body); font-size: 20px; font-weight: 500;
+      letter-spacing: -0.01em; color: var(--ink-mid); white-space: nowrap;
     }
-    .nav-pill:hover { transform: scale(1.04); }
-    .nav-pill--outline { border-color: var(--color-olive-leaf); color: var(--color-olive-leaf); background: transparent; }
-    .nav-pill--green   { background: var(--color-sweet-peony); color: #fff; border-color: var(--color-sweet-peony); }
-    .nav-pill--blue    { background: var(--color-icy-blue); color: var(--color-olive-dark); border-color: var(--color-icy-blue); }
-    .nav-mobile-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-    .nav-mobile-toggle span { display: block; width: 22px; height: 2px; background: var(--color-olive-dark); border-radius: 2px; }
+    .nav-logo strong { font-weight: 500; color: var(--ink); }
+    .nav-pills { display: flex; align-items: center; gap: 22px; }
+    .nav-link {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-mid);
+      padding: 6px 2px;
+      border-bottom: 2px solid transparent;
+      transition: color .18s ease, border-color .18s ease;
+      white-space: nowrap;
+      text-transform: lowercase;
+    }
+    .nav-link:hover   { color: var(--ink); border-bottom-color: var(--rule); }
+    .nav-link--thread { color: var(--ink); border-bottom: 2px solid var(--thread); }
+    .nav-cta__short { display: none; }
+    .nav-mobile-toggle {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      padding: 4px; background: none; border: none;
+    }
+    .nav-mobile-toggle span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
 
     /* ══════════════════════════════════════════
        HERO
     ══════════════════════════════════════════ */
     .hero {
-      background: var(--color-olive-leaf);
-      padding: 100px var(--section-padding-x);
+      background: var(--ground);
+      padding: 100px var(--section-padding-x) 0;
       position: relative; overflow: hidden;
     }
     .hero-inner {
       max-width: var(--container-max); margin: 0 auto; width: 100%;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end;
     }
-    .hero__text { position: relative; z-index: 2; }
-    .hero__text .text-label { color: rgba(255,255,255,0.55); display: block; margin-bottom: 20px; text-transform: lowercase; }
+    .hero__text { position: relative; z-index: 2; padding-bottom: 100px; }
+    .hero__text .text-label { color: var(--ink-muted); display: block; margin-bottom: 20px; }
     .hero-title {
       font-family: var(--font-display);
       font-size: clamp(48px, 7vw, 88px);
-      font-weight: 700; line-height: 1.0; letter-spacing: -0.02em;
-      color: #fff; margin-bottom: 28px;
+      font-weight: 400; line-height: 1.0; letter-spacing: -0.02em;
+      color: var(--ink); margin-bottom: 28px;
     }
     .hero-tagline {
       font-family: var(--font-body); font-size: 17px; line-height: 1.7;
-      color: rgba(255,255,255,0.8); max-width: 440px; margin-bottom: 40px;
-      text-transform: lowercase;
+      color: var(--ink-mid); max-width: 440px; margin-bottom: 40px;
     }
     .hero__cta { display: flex; gap: 12px; flex-wrap: wrap; }
-    .hero__photo {
-      display: flex; justify-content: flex-end; align-items: flex-end;
-      position: relative;
-    }
+    .hero__photo { display: flex; justify-content: flex-end; align-items: flex-end; position: relative; }
     .hero__photo img {
-      width: 100%; max-width: 440px; height: auto;
-      object-fit: contain; object-position: bottom;
-      border-radius: 20px 20px 0 0;
+      width: 100%; max-width: 440px; max-height: 560px;
+      height: auto; object-fit: contain; object-position: bottom;
+      border-radius: 0;
     }
+    /* TEMPORARY — remove once /img/morgane-hero.png exists (see note in report) */
     .hero__photo-placeholder {
-      width: 400px; height: 480px; border-radius: 20px 20px 0 0;
-      background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.15);
+      width: 100%; max-width: 440px; height: 520px;
+      border: 1px dashed var(--rule);
       display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-body); font-size: 13px;
-      color: rgba(255,255,255,0.3); text-align: center; line-height: 1.6;
+      font-family: var(--font-body); font-size: 14px;
+      color: var(--ink-muted); text-align: center; line-height: 1.6;
     }
 
     /* ══════════════════════════════════════════
        ABOUT & CAREER
     ══════════════════════════════════════════ */
     .about-career {
-      background: var(--color-honeydew);
+      background: var(--ground);
+      border-top: 1px solid var(--rule);
       padding: var(--section-padding-y) var(--section-padding-x);
     }
     .about-career-inner {
       max-width: var(--container-max); margin: 0 auto;
       display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
     }
-    .about-career__bio .text-label { color: var(--color-olive-leaf); display: block; margin-bottom: 16px; }
-    .about-career__bio .text-h3 { margin-bottom: 20px; }
+    .about-career__bio .text-label { color: var(--ink-muted); display: block; margin-bottom: 16px; }
+    .about-career__bio .text-h3 { margin-bottom: 20px; color: var(--ink); }
+    .about-career__bio .text-body { color: var(--ink-mid); }
     .about-career__bio .text-body + .text-body { margin-top: 16px; }
 
     /* Timeline */
-    .timeline-section .text-label { color: #aaa; display: block; margin-bottom: 24px; }
+    .timeline-section .text-label { color: var(--ink-muted); display: block; margin-bottom: 24px; }
     .timeline { display: flex; flex-direction: column; position: relative; }
     .timeline::before {
       content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px;
-      width: 1px; background: var(--color-icy-blue);
+      width: 1px; background: var(--rule);
     }
     .timeline-item { display: flex; gap: 20px; padding-bottom: 28px; position: relative; }
     .timeline-item::before {
       content: ''; width: 15px; height: 15px; border-radius: 50%;
-      background: var(--color-olive-leaf); border: 2px solid var(--color-honeydew);
+      background: var(--ink-mid); border: 2px solid var(--ground);
       flex-shrink: 0; margin-top: 4px; position: relative; z-index: 1;
     }
-    .timeline-item__org { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--color-olive-dark); margin: 0 0 2px; }
-    .timeline-item__role { font-family: var(--font-body); font-size: 14px; color: var(--color-olive-leaf); margin: 0 0 2px; text-transform: lowercase; }
-    .timeline-item__years { font-family: var(--font-body); font-size: 12px; color: #888; margin: 0; text-transform: lowercase; }
-    .timeline-item:hover .timeline-item__org { color: var(--color-olive-leaf); transition: color 0.15s; }
+    .timeline-item__org { font-family: var(--font-body); font-size: 18px; font-weight: 500; color: var(--ink); margin: 0 0 2px; }
+    .timeline-item__role { font-family: var(--font-body); font-size: 14px; color: var(--ink-mid); margin: 0 0 2px; }
+    .timeline-item__years { font-family: var(--font-body); font-size: 12px; color: var(--ink-muted); margin: 0; }
+    .timeline-item:hover .timeline-item__org { color: var(--ink-mid); transition: color 0.15s; }
 
     /* Education strip */
     .edu-strip {
       margin-top: 36px; padding-top: 28px;
-      border-top: 1px solid rgba(88,91,10,0.15);
+      border-top: 1px solid var(--rule);
     }
-    .edu-strip .text-label { color: #aaa; margin-bottom: 16px; display: block; }
+    .edu-strip .text-label { color: var(--ink-muted); margin-bottom: 16px; display: block; }
     .edu-item { margin-bottom: 14px; }
-    .edu-item__school { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--color-olive-dark); }
-    .edu-item__degree { font-family: var(--font-body); font-size: 13px; color: var(--color-olive-leaf); text-transform: lowercase; margin-top: 2px; }
+    .edu-item__school { font-family: var(--font-body); font-size: 16px; font-weight: 500; color: var(--ink); }
+    .edu-item__degree { font-family: var(--font-body); font-size: 14px; color: var(--ink-mid); margin-top: 2px; }
 
     /* ══════════════════════════════════════════
        CORE COMPETENCIES
     ══════════════════════════════════════════ */
-    .competencies { background: var(--color-cream); padding: var(--section-padding-y) var(--section-padding-x); }
+    .competencies {
+      background: var(--ground);
+      border-top: 1px solid var(--rule);
+      padding: var(--section-padding-y) var(--section-padding-x);
+    }
     .competencies-inner { max-width: var(--container-max); margin: 0 auto; }
     .competencies__header { margin-bottom: 48px; }
-    .competencies__header .text-label { color: var(--color-olive-leaf); display: block; margin-bottom: 12px; }
+    .competencies__header .text-label { color: var(--ink-muted); display: block; margin-bottom: 12px; }
     .comp-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 28px 40px;
     }
-    .comp-item { border-top: 1.5px solid rgba(88,91,10,0.18); padding-top: 18px; }
+    .comp-item { border-top: 1.5px solid var(--rule); padding-top: 18px; }
     .comp-item__title {
-      font-family: var(--font-display); font-size: 18px; font-weight: 700;
-      color: var(--color-olive-dark); margin: 0 0 8px;
+      font-family: var(--font-body); font-size: 18px; font-weight: 500;
+      color: var(--ink); margin: 0 0 8px;
     }
     .comp-item__list {
-      font-family: var(--font-body); font-size: 13.5px; line-height: 1.7;
-      color: var(--color-olive-leaf); text-transform: lowercase; margin: 0;
+      font-family: var(--font-body); font-size: 14px; line-height: 1.7;
+      color: var(--ink-mid); margin: 0;
     }
     .lang-strip {
       margin-top: 48px; padding-top: 28px;
-      border-top: 1px solid rgba(88,91,10,0.15);
+      border-top: 1px solid var(--rule);
       display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 28px;
     }
-    .lang-strip .text-label { color: var(--color-olive-leaf); display: block; width: 100%; margin-bottom: 4px; }
-    .lang-item {
-      font-family: var(--font-body); font-size: 14px;
-      color: var(--color-olive-dark); text-transform: lowercase;
-    }
-    .lang-item span { color: var(--color-olive-leaf); opacity: 0.7; }
+    .lang-strip .text-label { color: var(--ink-muted); display: block; width: 100%; margin-bottom: 4px; }
+    .lang-item { font-family: var(--font-body); font-size: 14px; color: var(--ink); }
+    .lang-item span { color: var(--ink-muted); }
 
     /* ══════════════════════════════════════════
-       WORK WITH ME
+       WORK WITH ME — the one dark block
     ══════════════════════════════════════════ */
-    .work-with-me { background: var(--color-icy-blue); padding: var(--section-padding-y) var(--section-padding-x); }
+    .work-with-me { background: var(--ground-dark); padding: var(--section-padding-y) var(--section-padding-x); }
     .work-with-me-inner { max-width: var(--container-max); margin: 0 auto; }
     .work-header { text-align: center; margin-bottom: 56px; }
-    .work-header .text-label { color: var(--color-olive-leaf); display: block; margin-bottom: 12px; }
-    .work-header .text-h2 { margin-bottom: 16px; }
-    .work-header .text-body { max-width: 480px; margin: 0 auto; color: var(--color-olive-dark); }
+    .work-header .text-label { color: var(--ink-on-dark-muted); display: block; margin-bottom: 12px; }
+    .work-header .text-h2 { color: var(--ink-on-dark); margin-bottom: 16px; }
+    .work-header .text-body { max-width: 480px; margin: 0 auto; color: var(--ink-on-dark-muted); }
     .work-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .work-tile {
-      background: rgba(255,255,255,0.55); border: 1.5px solid rgba(88,91,10,0.15);
+      background: var(--surface-on-dark);
+      border: 1px solid var(--rule-on-dark);
       border-radius: var(--radius-card); padding: 36px 32px;
       display: flex; flex-direction: column; gap: 12px;
-      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+      transition: border-color 0.2s ease, transform 0.2s ease;
     }
-    .work-tile:hover { background: rgba(255,255,255,0.85); border-color: var(--color-olive-leaf); transform: translateY(-4px); }
+    .work-tile:hover { border-color: var(--accent); transform: translateY(-2px); }
     .work-tile__icon { font-size: 28px; margin-bottom: 4px; }
-    .work-tile__title { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--color-olive-dark); }
-    .work-tile__desc { font-family: var(--font-body); font-size: 14px; color: #555; line-height: 1.65; flex: 1; text-transform: lowercase; }
-    .work-tile__cta { font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--color-olive-leaf); align-self: flex-start; margin-top: auto; text-transform: lowercase; }
+    .work-tile__title { font-family: var(--font-body); font-size: 22px; font-weight: 500; color: var(--ink-on-dark); }
+    .work-tile__desc { font-family: var(--font-body); font-size: 14px; color: var(--ink-on-dark-muted); line-height: 1.65; flex: 1; }
+    .work-tile__cta {
+      font-family: var(--font-body); font-size: 13px; font-weight: 600;
+      color: var(--accent); align-self: flex-start; margin-top: auto;
+      text-transform: lowercase;
+    }
     .work-tile__cta:hover { text-decoration: underline; }
     .work-footer { text-align: center; margin-top: 48px; }
-    .work-footer-note { font-family: var(--font-display); font-size: 18px; color: var(--color-olive-leaf); margin-bottom: 16px; display: block; }
+    .work-footer-note {
+      font-family: var(--font-body); font-size: 18px; font-weight: 400;
+      color: var(--ink-on-dark-muted); margin-bottom: 16px; display: block;
+    }
 
     /* ══════════════════════════════════════════
        AI CENTRAL MEDIA
     ══════════════════════════════════════════ */
-    .ai-central { background: var(--color-olive-dark); padding: var(--section-padding-y) var(--section-padding-x); }
+    .ai-central {
+      background: var(--ground);
+      border-top: 1px solid var(--rule);
+      padding: var(--section-padding-y) var(--section-padding-x);
+    }
     .ai-central-inner {
       max-width: var(--container-max); margin: 0 auto;
       display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
     }
-    .ai-central__left .text-label { color: rgba(255,255,255,0.4); display: block; margin-bottom: 16px; }
-    .ai-central__left .text-h3 { color: #fff; margin-bottom: 20px; }
-    .ai-central__left .text-body { color: rgba(255,255,255,0.72); max-width: 380px; }
+    .ai-central__left .text-label { color: var(--ink-muted); display: block; margin-bottom: 16px; }
+    .ai-central__left .text-h3 { color: var(--ink); margin-bottom: 20px; }
+    .ai-central__left .text-body { color: var(--ink-mid); max-width: 380px; }
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
     .stat-card {
-      background: var(--color-olive-leaf); border-radius: var(--radius-card);
+      background: var(--ink-mid); border-radius: var(--radius-card);
       padding: 28px 24px; display: flex; flex-direction: column; gap: 6px;
       transition: transform 0.2s ease;
     }
     .stat-card:hover { transform: translateY(-4px); }
-    .stat-card__number { font-family: var(--font-display); font-size: 42px; font-weight: 700; color: var(--color-lemon-lime); line-height: 1; }
-    .stat-card__label  { font-family: var(--font-body); font-size: 13px; color: rgba(255,255,255,0.7); text-transform: lowercase; }
-
-    /* ══════════════════════════════════════════
-       PHOTO STRIP
-    ══════════════════════════════════════════ */
-    .photo-strip { display: grid; grid-template-columns: repeat(6, 1fr); width: 100%; overflow: hidden; }
-    .photo-strip-item { height: 260px; overflow: hidden; }
-    .photo-strip-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
-    .photo-strip-item:hover img { transform: scale(1.05); }
-    .photo-strip-placeholder {
-      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-body); font-size: 11px;
-      color: rgba(255,255,255,0.4); letter-spacing: 0.06em; text-transform: lowercase;
-    }
+    .stat-card__number { font-family: var(--font-display); font-size: 48px; font-weight: 400; color: var(--accent); line-height: 1; }
+    .stat-card__label  { font-family: var(--font-body); font-size: 13px; color: var(--ground); text-transform: lowercase; }
 
     /* ══════════════════════════════════════════
        FOOTER
     ══════════════════════════════════════════ */
-    footer { background: var(--color-cream); padding-top: 80px; overflow: hidden; }
+    footer { background: var(--ground); border-top: 1px solid var(--rule); padding-top: 80px; overflow: hidden; }
     .footer__nav {
       display: grid; grid-template-columns: repeat(4, auto); justify-content: start;
       gap: 60px; padding: 0 var(--section-padding-x) 60px;
       max-width: var(--container-max); margin: 0 auto;
     }
-    .footer__col-title { font-family: var(--font-body); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: #999; margin-bottom: 14px; text-transform: lowercase; }
-    .footer__col a { display: block; font-size: 14px; color: var(--color-olive-dark); margin-bottom: 10px; transition: color 0.15s; text-transform: lowercase; }
-    .footer__col a:hover { color: var(--color-olive-leaf); }
-    .footer-wordmark {
-      font-family: var(--font-display); font-size: clamp(64px, 11vw, 140px); font-weight: 700;
-      color: var(--color-olive-leaf); line-height: 0.9; letter-spacing: -0.03em;
-      padding: 0 var(--section-padding-x); white-space: nowrap; overflow: hidden; text-transform: uppercase;
+    .footer__col-title {
+      font-family: var(--font-body); font-size: 12px; font-weight: 600;
+      letter-spacing: 0.12em; color: var(--ink-muted); margin-bottom: 14px;
+      text-transform: lowercase;
     }
-    .footer-wordmark em { margin: 0 0.1em; }
-    .footer-tagline { font-family: var(--font-body); font-size: 14px; color: #aaa; padding: 0 var(--section-padding-x) 40px; margin-top: 8px; display: block; text-transform: lowercase; }
+    .footer__col a { display: block; font-size: 14px; color: var(--ink); margin-bottom: 10px; transition: color 0.15s; }
+    .footer__col a:hover { color: var(--ink-mid); }
+    .footer-wordmark {
+      font-family: var(--font-display); font-size: clamp(64px, 11vw, 140px); font-weight: 400;
+      color: var(--ink-mid); line-height: 0.9; letter-spacing: -0.03em;
+      padding: 0 var(--section-padding-x); white-space: nowrap; overflow: hidden;
+    }
+    .footer-wordmark em { font-style: normal; margin: 0 0.1em; }
+    .footer-tagline {
+      font-family: var(--font-body); font-size: 14px; color: var(--ink-muted);
+      padding: 0 var(--section-padding-x) 40px; margin-top: 8px; display: block;
+      text-transform: lowercase;
+    }
     .footer__strip {
-      background: var(--color-olive-leaf); color: rgba(255,255,255,0.7);
+      background: var(--ground-dark); color: var(--ink-on-dark-muted);
       font-size: 12px; font-family: var(--font-body);
       padding: 20px var(--section-padding-x);
       display: flex; justify-content: space-between; align-items: center;
@@ -373,20 +409,28 @@
     ══════════════════════════════════════════ */
     @media (max-width: 768px) {
       :root { --section-padding-y: 72px; --section-padding-x: 24px; }
-      .site-nav { padding: 0 24px; height: 60px; }
+      .site-nav { min-height: 60px; height: auto; padding: 0 24px; gap: 12px; }
+      .nav-logo { font-size: 16px; }
+      .site-nav .btn { font-size: 12px; padding: 9px 16px; }
+      .nav-cta__full  { display: none; }
+      .nav-cta__short { display: inline; }
       .nav-pills { display: none; }
+      .nav-pills--open {
+        display: flex; flex-direction: column; align-items: flex-start;
+        position: absolute; top: 60px; left: 0; right: 0;
+        background: var(--ground); padding: 20px 24px; gap: 14px;
+        border-bottom: 1px solid var(--rule); z-index: 99;
+      }
       .nav-mobile-toggle { display: flex; }
-      .hero { padding: 72px 24px 60px; }
+      .hero { padding: 72px 24px 0; }
       .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero__text { padding-bottom: 56px; }
       .hero__photo { justify-content: center; }
-      .hero__photo-placeholder { width: 100%; height: 260px; }
+      .hero__photo-placeholder { height: 320px; }
       .about-career-inner { grid-template-columns: 1fr; gap: 48px; }
       .ai-central-inner   { grid-template-columns: 1fr; gap: 48px; }
       .work-tiles { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .photo-strip { grid-template-columns: repeat(3, 1fr); }
-      .photo-strip-item:nth-child(n+4) { display: none; }
-      .photo-strip-item { height: 180px; }
       .footer__nav { grid-template-columns: 1fr 1fr; gap: 32px; }
       .footer-wordmark { font-size: 17vw; }
       .footer__strip { flex-direction: column; gap: 6px; text-align: center; }
@@ -398,14 +442,16 @@
   <!-- NAV -->
   <nav class="site-nav" id="site-nav">
     <a href="/" class="nav-logo">Morgane <strong>Marlow</strong></a>
-    <div class="nav-pills">
-      <a href="#about"  class="nav-pill nav-pill--outline">about</a>
-      <a href="#career" class="nav-pill nav-pill--outline">career</a>
-      <a href="#work"   class="nav-pill nav-pill--blue">work with me</a>
-      <a href="https://butwhy.com" target="_blank" rel="noopener" class="nav-pill nav-pill--green">but, why? ↗</a>
+    <div class="nav-pills" id="nav-pills">
+      <a href="#about"  class="nav-link">about</a>
+      <a href="#career" class="nav-link">career</a>
+      <a href="#work"   class="nav-link">work with me</a>
+      <a href="https://butwhy.com" target="_blank" rel="noopener" class="nav-link nav-link--thread">but, why? ↗</a>
     </div>
-    <a href="mailto:contact@morganemarlow.com" class="btn btn-primary">get in touch →</a>
-    <button class="nav-mobile-toggle" aria-label="Menu" onclick="toggleMobileNav()">
+    <a href="mailto:contact@morganemarlow.com" class="btn btn-primary">
+      <span class="nav-cta__full">get in touch →</span><span class="nav-cta__short">email →</span>
+    </a>
+    <button class="nav-mobile-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-pills" onclick="toggleMobileNav(this)">
       <span></span><span></span><span></span>
     </button>
   </nav>
@@ -420,19 +466,20 @@
           i partner with leadership teams to navigate complexity and move priorities forward — especially where policy, partnerships, and cross-border growth intersect. with 8+ years across government, tech-enabled businesses, and regulated industries, i bring structure to ambiguity.
         </p>
         <p class="hero-tagline reveal reveal-d2" style="margin-top:-24px;">
-          kellogg mba. currently coo of ai central media. london-based, perpetually curious.
+          Kellogg MBA. currently COO of AI Central Media. London-based, perpetually curious.
         </p>
         <div class="hero__cta reveal reveal-d3">
           <a href="#work" class="btn btn-primary">work with me →</a>
-          <a href="mailto:contact@morganemarlow.com" class="btn btn-outline-white">get in touch</a>
+          <a href="mailto:contact@morganemarlow.com" class="btn btn-secondary">get in touch</a>
         </div>
       </div>
       <div class="hero__photo reveal reveal-d2">
         <!--
-          Replace with: <img src="/img/morgane-hero.png" alt="Morgane Marlow" />
-          (PNG with transparent background, portrait orientation)
+          Swap this placeholder for the portrait once the asset exists:
+          <img src="/img/morgane-hero.png" alt="Morgane Marlow"
+               width="880" height="1100" fetchpriority="high" decoding="async" />
         -->
-        <div class="hero__photo-placeholder">photo<br>(png cutout<br>goes here)</div>
+        <div class="hero__photo-placeholder">portrait<br>(transparent png cutout)</div>
       </div>
     </div>
   </section>
@@ -445,21 +492,21 @@
         <span class="text-label">background</span>
         <h2 class="text-h3" style="margin-top:16px; margin-bottom:20px;">chief of staff-style strategist &amp; connector.</h2>
         <p class="text-body">
-          london-based (mostly). 30-something. my career has taken me from financial services in scottsdale to the halls of whitehall, from hedge fund operations in chicago to building a media company from scratch. i've spent time in the places where policy meets business, and i understand how to work both sides.
+          London-based (mostly). 30-something. my career has taken me from financial services in Scottsdale to the halls of Whitehall, from hedge fund operations in Chicago to building a media company from scratch. i've spent time in the places where policy meets business, and i understand how to work both sides.
         </p>
         <p class="text-body" style="margin-top:16px;">
-          i left the us after 27 years to return to the uk, and somewhere between the jet lag and the job applications, my partner convinced me to build something of my own. now i'm coo of ai central media — and writing a newsletter called <em>but, why?</em> on the side, because curiosity doesn't pay rent but it does keep life interesting.
+          i left the US after 27 years to return to the UK, and somewhere between the jet lag and the job applications, my partner convinced me to build something of my own. now i'm COO of AI Central Media — and writing a newsletter called <em>but, why?</em> on the side, because curiosity doesn't pay rent but it does keep life interesting.
         </p>
 
         <div class="edu-strip">
           <span class="text-label">education</span>
           <div class="edu-item">
             <p class="edu-item__school">Kellogg School of Management</p>
-            <p class="edu-item__degree">mba, strategy · northwestern university · 2020 – 2022</p>
+            <p class="edu-item__degree">MBA, Strategy · Northwestern University · 2020 – 2022</p>
           </div>
           <div class="edu-item">
             <p class="edu-item__school">University of Oregon</p>
-            <p class="edu-item__degree">bs · business administration · 2010 – 2014</p>
+            <p class="edu-item__degree">BS · Business Administration · 2010 – 2014</p>
           </div>
         </div>
       </div>
@@ -470,36 +517,36 @@
           <div class="timeline-item">
             <div class="timeline-item__content">
               <p class="timeline-item__org">AI Central Media</p>
-              <p class="timeline-item__role">coo &amp; co-founder</p>
-              <p class="timeline-item__years">2024 – present · london</p>
+              <p class="timeline-item__role">COO &amp; co-founder</p>
+              <p class="timeline-item__years">2024 – present · London</p>
             </div>
           </div>
           <div class="timeline-item">
             <div class="timeline-item__content">
               <p class="timeline-item__org">UK Government — DBT</p>
               <p class="timeline-item__role">senior trade &amp; investment officer · banking lead, financial &amp; professional services</p>
-              <p class="timeline-item__years">2022 – 2025 · chicago</p>
+              <p class="timeline-item__years">2022 – 2025 · Chicago</p>
             </div>
           </div>
           <div class="timeline-item">
             <div class="timeline-item__content">
               <p class="timeline-item__org">Northern Trust</p>
               <p class="timeline-item__role">senior consultant, hedge fund services</p>
-              <p class="timeline-item__years">2018 – 2021 · chicago</p>
+              <p class="timeline-item__years">2018 – 2021 · Chicago</p>
             </div>
           </div>
           <div class="timeline-item">
             <div class="timeline-item__content">
               <p class="timeline-item__org">Northern Trust</p>
               <p class="timeline-item__role">senior analyst, alternative investments</p>
-              <p class="timeline-item__years">2015 – 2018 · scottsdale</p>
+              <p class="timeline-item__years">2015 – 2018 · Scottsdale</p>
             </div>
           </div>
           <div class="timeline-item">
             <div class="timeline-item__content">
               <p class="timeline-item__org">The Vanguard Group</p>
               <p class="timeline-item__role">client relationship associate</p>
-              <p class="timeline-item__years">2014 – 2015 · scottsdale</p>
+              <p class="timeline-item__years">2014 – 2015 · Scottsdale</p>
             </div>
           </div>
         </div>
@@ -523,7 +570,7 @@
         </div>
         <div class="comp-item reveal reveal-d1">
           <h3 class="comp-item__title">Strategy &amp; Cross-Border Growth</h3>
-          <p class="comp-item__list">market entry strategy · uk–us expansion · commercial partnerships · negotiation</p>
+          <p class="comp-item__list">market entry strategy · UK–US expansion · commercial partnerships · negotiation</p>
         </div>
         <div class="comp-item reveal reveal-d2">
           <h3 class="comp-item__title">Policy &amp; Public Affairs</h3>
@@ -531,23 +578,23 @@
         </div>
         <div class="comp-item reveal reveal-d2">
           <h3 class="comp-item__title">Stakeholder &amp; Relationship Management</h3>
-          <p class="comp-item__list">stakeholder mapping · c-suite engagement · relationship management · convening</p>
+          <p class="comp-item__list">stakeholder mapping · C-suite engagement · relationship management · convening</p>
         </div>
         <div class="comp-item reveal reveal-d3">
           <h3 class="comp-item__title">Technology &amp; Tools</h3>
-          <p class="comp-item__list">ai tooling &amp; workflow design · crm &amp; pipeline systems · reporting · process improvement</p>
+          <p class="comp-item__list">AI tooling &amp; workflow design · CRM &amp; pipeline systems · reporting · process improvement</p>
         </div>
         <div class="comp-item reveal reveal-d3">
           <h3 class="comp-item__title">Domain Expertise</h3>
-          <p class="comp-item__list">uk–us markets · financial services · banking · fintech · asset management</p>
+          <p class="comp-item__list">UK–US markets · financial services · banking · fintech · asset management</p>
         </div>
       </div>
 
       <div class="lang-strip reveal">
         <span class="text-label">languages</span>
-        <p class="lang-item">english <span>· native</span></p>
-        <p class="lang-item">french <span>· conversational</span></p>
-        <p class="lang-item">italian <span>· conversational</span></p>
+        <p class="lang-item">English <span>· native</span></p>
+        <p class="lang-item">French <span>· conversational</span></p>
+        <p class="lang-item">Italian <span>· conversational</span></p>
       </div>
     </div>
   </section>
@@ -570,7 +617,7 @@
         <div class="work-tile reveal reveal-d2">
           <div class="work-tile__icon">🎤</div>
           <h3 class="work-tile__title">speaking</h3>
-          <p class="work-tile__desc">ai, media, operator strategy, building in public. details coming soon.</p>
+          <p class="work-tile__desc">AI, media, operator strategy, building in public. details coming soon.</p>
           <a href="mailto:contact@morganemarlow.com" class="work-tile__cta">book me →</a>
         </div>
         <div class="work-tile reveal reveal-d3">
@@ -582,7 +629,7 @@
       </div>
       <div class="work-footer reveal">
         <em class="work-footer-note">not sure which fits? just say hello.</em>
-        <a href="mailto:contact@morganemarlow.com" class="btn btn-secondary">contact@morganemarlow.com →</a>
+        <a href="mailto:contact@morganemarlow.com" class="btn btn-on-dark">contact@morganemarlow.com →</a>
       </div>
     </div>
   </section>
@@ -594,10 +641,10 @@
         <span class="text-label">currently building</span>
         <h2 class="text-h3" style="margin-top:16px;">AI Central Media</h2>
         <p class="text-body" style="margin-top:20px;">
-          the leading newsletter and media company covering ai for business leaders and operators. co-founded with alex fiore. seed-stage, london-based.
+          the leading newsletter and media company covering AI for business leaders and operators. co-founded with Alex Fiore. seed-stage, London-based.
         </p>
         <a href="https://aicentral.com" target="_blank" rel="noopener noreferrer"
-           class="btn btn-outline-white" style="margin-top:28px;">visit ai central media ↗</a>
+           class="btn btn-secondary" style="margin-top:28px;">visit ai central media ↗</a>
       </div>
       <div class="ai-central__stats reveal reveal-d2">
         <div class="stats-grid">
@@ -607,7 +654,7 @@
           </div>
           <div class="stat-card">
             <span class="stat-card__number">178K</span>
-            <span class="stat-card__label">linkedin subscribers</span>
+            <span class="stat-card__label">LinkedIn subscribers</span>
           </div>
           <div class="stat-card">
             <span class="stat-card__number">75K+</span>
@@ -617,16 +664,6 @@
       </div>
     </div>
   </section>
-
-  <!-- PHOTO STRIP -->
-  <div class="photo-strip" aria-label="photo gallery">
-    <div class="photo-strip-item" style="background:#585B0A;"><div class="photo-strip-placeholder">photo 1</div></div>
-    <div class="photo-strip-item" style="background:#CE75A1;"><div class="photo-strip-placeholder">photo 2</div></div>
-    <div class="photo-strip-item" style="background:#D3D858;"><div class="photo-strip-placeholder">photo 3</div></div>
-    <div class="photo-strip-item" style="background:#B5DCFD;"><div class="photo-strip-placeholder">photo 4</div></div>
-    <div class="photo-strip-item" style="background:#2B2D00;"><div class="photo-strip-placeholder">photo 5</div></div>
-    <div class="photo-strip-item" style="background:#EFF9DC;"><div class="photo-strip-placeholder">photo 6</div></div>
-  </div>
 
   <!-- FOOTER -->
   <footer>
@@ -639,12 +676,12 @@
       </div>
       <div class="footer__col">
         <p class="footer__col-title">building</p>
-        <a href="https://aicentral.com" target="_blank" rel="noopener noreferrer">ai central media ↗</a>
+        <a href="https://aicentral.com" target="_blank" rel="noopener noreferrer">AI Central Media ↗</a>
         <a href="https://butwhy.com" target="_blank" rel="noopener noreferrer">but, why? newsletter ↗</a>
       </div>
       <div class="footer__col">
         <p class="footer__col-title">connect</p>
-        <a href="https://linkedin.com/in/morganeejmarlow" target="_blank" rel="noopener noreferrer">linkedin ↗</a>
+        <a href="https://linkedin.com/in/morganeejmarlow" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
         <a href="mailto:contact@morganemarlow.com">email</a>
       </div>
       <div class="footer__col">
@@ -656,11 +693,13 @@
     <span class="footer-tagline">strategist · operator · builder</span>
     <div class="footer__strip">
       <p>© 2026 morgane marlow. all rights reserved.</p>
-      <p>london — milan — always online</p>
+      <p>London — Milan — always online</p>
     </div>
   </footer>
 
   <script>
+    document.documentElement.classList.remove('no-js');
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
     }, { threshold: 0.12 });
@@ -675,13 +714,10 @@
       nav.classList.toggle('nav--scrolled', window.scrollY > 60);
     }, { passive: true });
 
-    function toggleMobileNav() {
-      const pills = document.querySelector('.nav-pills');
-      const isOpen = pills.style.display === 'flex';
-      pills.style.cssText = isOpen ? '' :
-        'display:flex;flex-direction:column;position:absolute;top:60px;left:0;right:0;' +
-        'background:var(--color-honeydew);padding:20px 24px;gap:10px;' +
-        'border-bottom:1px solid rgba(0,0,0,0.07);z-index:99;';
+    function toggleMobileNav(btn) {
+      const pills = document.getElementById('nav-pills');
+      const isOpen = pills.classList.toggle('nav-pills--open');
+      btn.setAttribute('aria-expanded', String(isOpen));
     }
   </script>
 
