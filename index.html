@@ -250,6 +250,39 @@
     .edu-item__degree { font-family: var(--font-body); font-size: 13px; color: var(--color-olive-leaf); text-transform: lowercase; margin-top: 2px; }
 
     /* ══════════════════════════════════════════
+       CORE COMPETENCIES
+    ══════════════════════════════════════════ */
+    .competencies { background: var(--color-cream); padding: var(--section-padding-y) var(--section-padding-x); }
+    .competencies-inner { max-width: var(--container-max); margin: 0 auto; }
+    .competencies__header { margin-bottom: 48px; }
+    .competencies__header .text-label { color: var(--color-olive-leaf); display: block; margin-bottom: 12px; }
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px 40px;
+    }
+    .comp-item { border-top: 1.5px solid rgba(88,91,10,0.18); padding-top: 18px; }
+    .comp-item__title {
+      font-family: var(--font-display); font-size: 18px; font-weight: 700;
+      color: var(--color-olive-dark); margin: 0 0 8px;
+    }
+    .comp-item__list {
+      font-family: var(--font-body); font-size: 13.5px; line-height: 1.7;
+      color: var(--color-olive-leaf); text-transform: lowercase; margin: 0;
+    }
+    .lang-strip {
+      margin-top: 48px; padding-top: 28px;
+      border-top: 1px solid rgba(88,91,10,0.15);
+      display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 28px;
+    }
+    .lang-strip .text-label { color: var(--color-olive-leaf); display: block; width: 100%; margin-bottom: 4px; }
+    .lang-item {
+      font-family: var(--font-body); font-size: 14px;
+      color: var(--color-olive-dark); text-transform: lowercase;
+    }
+    .lang-item span { color: var(--color-olive-leaf); opacity: 0.7; }
+
+    /* ══════════════════════════════════════════
        WORK WITH ME
     ══════════════════════════════════════════ */
     .work-with-me { background: var(--color-icy-blue); padding: var(--section-padding-y) var(--section-padding-x); }
@@ -371,7 +404,7 @@
       <a href="#work"   class="nav-pill nav-pill--blue">work with me</a>
       <a href="https://butwhy.com" target="_blank" rel="noopener" class="nav-pill nav-pill--green">but, why? ↗</a>
     </div>
-    <a href="mailto:hello@morganemarlow.com" class="btn btn-primary">get in touch →</a>
+    <a href="mailto:contact@morganemarlow.com" class="btn btn-primary">get in touch →</a>
     <button class="nav-mobile-toggle" aria-label="Menu" onclick="toggleMobileNav()">
       <span></span><span></span><span></span>
     </button>
@@ -391,7 +424,7 @@
         </p>
         <div class="hero__cta reveal reveal-d3">
           <a href="#work" class="btn btn-primary">work with me →</a>
-          <a href="mailto:hello@morganemarlow.com" class="btn btn-outline-white">get in touch</a>
+          <a href="mailto:contact@morganemarlow.com" class="btn btn-outline-white">get in touch</a>
         </div>
       </div>
       <div class="hero__photo reveal reveal-d2">
@@ -422,11 +455,11 @@
           <span class="text-label">education</span>
           <div class="edu-item">
             <p class="edu-item__school">Kellogg School of Management</p>
-            <p class="edu-item__degree">mba · northwestern university</p>
+            <p class="edu-item__degree">mba, strategy · northwestern university · 2020 – 2022</p>
           </div>
           <div class="edu-item">
-            <p class="edu-item__school">University of Edinburgh</p>
-            <p class="edu-item__degree">bsc · international business</p>
+            <p class="edu-item__school">University of Oregon</p>
+            <p class="edu-item__degree">bs · business administration · 2010 – 2014</p>
           </div>
         </div>
       </div>
@@ -444,7 +477,7 @@
           <div class="timeline-item">
             <div class="timeline-item__content">
               <p class="timeline-item__org">UK Government — DBT</p>
-              <p class="timeline-item__role">senior trade &amp; investment officer</p>
+              <p class="timeline-item__role">senior trade &amp; investment officer · banking lead, financial &amp; professional services</p>
               <p class="timeline-item__years">2022 – 2025 · chicago</p>
             </div>
           </div>
@@ -457,6 +490,13 @@
           </div>
           <div class="timeline-item">
             <div class="timeline-item__content">
+              <p class="timeline-item__org">Northern Trust</p>
+              <p class="timeline-item__role">senior analyst, alternative investments</p>
+              <p class="timeline-item__years">2015 – 2018 · scottsdale</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-item__content">
               <p class="timeline-item__org">The Vanguard Group</p>
               <p class="timeline-item__role">client relationship associate</p>
               <p class="timeline-item__years">2014 – 2015 · scottsdale</p>
@@ -465,6 +505,50 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- CORE COMPETENCIES -->
+  <section class="competencies">
+    <div class="competencies-inner">
+      <div class="competencies__header reveal">
+        <span class="text-label">what i do</span>
+        <h2 class="text-h2" style="margin-top:12px;">core competencies.</h2>
+      </div>
+
+      <div class="comp-grid">
+        <div class="comp-item reveal reveal-d1">
+          <h3 class="comp-item__title">Chief of Staff &amp; Strategic Enablement</h3>
+          <p class="comp-item__list">executive communications · priority setting · operating cadence · briefing &amp; decision support</p>
+        </div>
+        <div class="comp-item reveal reveal-d1">
+          <h3 class="comp-item__title">Strategy &amp; Cross-Border Growth</h3>
+          <p class="comp-item__list">market entry strategy · uk–us expansion · commercial partnerships · negotiation</p>
+        </div>
+        <div class="comp-item reveal reveal-d2">
+          <h3 class="comp-item__title">Policy &amp; Public Affairs</h3>
+          <p class="comp-item__list">regulatory analysis · government engagement · trade missions · investor roundtables</p>
+        </div>
+        <div class="comp-item reveal reveal-d2">
+          <h3 class="comp-item__title">Stakeholder &amp; Relationship Management</h3>
+          <p class="comp-item__list">stakeholder mapping · c-suite engagement · relationship management · convening</p>
+        </div>
+        <div class="comp-item reveal reveal-d3">
+          <h3 class="comp-item__title">Technology &amp; Tools</h3>
+          <p class="comp-item__list">ai tooling &amp; workflow design · crm &amp; pipeline systems · reporting · process improvement</p>
+        </div>
+        <div class="comp-item reveal reveal-d3">
+          <h3 class="comp-item__title">Domain Expertise</h3>
+          <p class="comp-item__list">uk–us markets · financial services · banking · fintech · asset management</p>
+        </div>
+      </div>
+
+      <div class="lang-strip reveal">
+        <span class="text-label">languages</span>
+        <p class="lang-item">english <span>· native</span></p>
+        <p class="lang-item">french <span>· conversational</span></p>
+        <p class="lang-item">italian <span>· conversational</span></p>
+      </div>
     </div>
   </section>
 
@@ -481,24 +565,24 @@
           <div class="work-tile__icon">🧭</div>
           <h3 class="work-tile__title">advisory &amp; consulting</h3>
           <p class="work-tile__desc">strategy, growth, cross-border expansion. details coming soon.</p>
-          <a href="mailto:hello@morganemarlow.com" class="work-tile__cta">let's talk →</a>
+          <a href="mailto:contact@morganemarlow.com" class="work-tile__cta">let's talk →</a>
         </div>
         <div class="work-tile reveal reveal-d2">
           <div class="work-tile__icon">🎤</div>
           <h3 class="work-tile__title">speaking</h3>
           <p class="work-tile__desc">ai, media, operator strategy, building in public. details coming soon.</p>
-          <a href="mailto:hello@morganemarlow.com" class="work-tile__cta">book me →</a>
+          <a href="mailto:contact@morganemarlow.com" class="work-tile__cta">book me →</a>
         </div>
         <div class="work-tile reveal reveal-d3">
           <div class="work-tile__icon">🤝</div>
           <h3 class="work-tile__title">partnerships &amp; media</h3>
           <p class="work-tile__desc">newsletter partnerships and brand collaborations. details coming soon.</p>
-          <a href="mailto:hello@morganemarlow.com" class="work-tile__cta">get in touch →</a>
+          <a href="mailto:contact@morganemarlow.com" class="work-tile__cta">get in touch →</a>
         </div>
       </div>
       <div class="work-footer reveal">
         <em class="work-footer-note">not sure which fits? just say hello.</em>
-        <a href="mailto:hello@morganemarlow.com" class="btn btn-secondary">hello@morganemarlow.com →</a>
+        <a href="mailto:contact@morganemarlow.com" class="btn btn-secondary">contact@morganemarlow.com →</a>
       </div>
     </div>
   </section>
@@ -560,8 +644,8 @@
       </div>
       <div class="footer__col">
         <p class="footer__col-title">connect</p>
-        <a href="https://linkedin.com/in/morgane-marlow" target="_blank" rel="noopener noreferrer">linkedin ↗</a>
-        <a href="mailto:hello@morganemarlow.com">email</a>
+        <a href="https://linkedin.com/in/morganeejmarlow" target="_blank" rel="noopener noreferrer">linkedin ↗</a>
+        <a href="mailto:contact@morganemarlow.com">email</a>
       </div>
       <div class="footer__col">
         <p class="footer__col-title">newsletter</p>
