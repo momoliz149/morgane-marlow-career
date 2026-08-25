@@ -185,9 +185,12 @@
        ABOUT & CAREER — paper
     ══════════════════════════════════════════ */
     .about-career { background: var(--paper); padding: var(--section-padding-y) var(--section-padding-x); }
-    .about-career-inner { max-width: var(--container-max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .about-career-inner { max-width: var(--container-max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 0 80px; align-items: start; }
+    /* Header spans both columns so it can sit on one line */
+    .about-career__head { grid-column: 1 / -1; margin-bottom: 56px; }
+    .about-career__head .text-label { color: var(--muted); display: block; margin-bottom: 16px; }
+    .about-career__head .text-h2 { color: var(--ink); white-space: nowrap; }
     .about-career__bio .text-label { color: var(--muted); display: block; margin-bottom: 16px; }
-    .about-career__bio .text-h2 { color: var(--ink); }
     .about-career__bio .text-body { color: var(--ink-mid); max-width: 58ch; }
     .about-career__bio em { font-style: italic; color: var(--ink); }
 
@@ -324,6 +327,8 @@
       .hero__photo { justify-content: center; }
       .hero__photo img { max-width: 320px; }
       .about-career-inner { grid-template-columns: 1fr; gap: 48px; }
+      .about-career__head { margin-bottom: 0; }
+      .about-career__head .text-h2 { white-space: normal; }
       .ai-central-inner   { grid-template-columns: 1fr; gap: 44px; }
       .comp-grid  { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -381,9 +386,12 @@
   <section class="about-career" id="career">
     <div class="about-career-inner">
 
-      <div class="about-career__bio reveal">
+      <div class="about-career__head reveal">
         <span class="text-label">background</span>
-        <h2 class="text-h2" style="margin-top:16px; margin-bottom:24px;">chief of staff-style strategist &amp; connector.</h2>
+        <h2 class="text-h2" style="margin-top:16px;">chief of staff-style strategist &amp; connector.</h2>
+      </div>
+
+      <div class="about-career__bio reveal">
         <p class="text-body">
           London-based (mostly). 30-something. my career has taken me from financial services in Scottsdale to the halls of Whitehall, from hedge fund operations in Chicago to building a media company from scratch. i've spent time in the places where policy meets business, and i understand how to work both sides.
         </p>
