@@ -189,7 +189,9 @@
     /* Header spans both columns so it can sit on one line */
     .about-career__head { grid-column: 1 / -1; margin-bottom: 56px; }
     .about-career__head .text-label { color: var(--muted); display: block; margin-bottom: 16px; }
-    .about-career__head .text-h2 { color: var(--ink); white-space: nowrap; }
+    .about-career__head .text-h2 { color: var(--ink); font-size: clamp(44px, 4.5vw, 58px); }
+    /* One line only where the full string actually fits; wraps below */
+    @media (min-width: 1280px) { .about-career__head .text-h2 { white-space: nowrap; } }
     .about-career__bio .text-label { color: var(--muted); display: block; margin-bottom: 16px; }
     .about-career__bio .text-body { color: var(--ink-mid); max-width: 58ch; }
     .about-career__bio em { font-style: italic; color: var(--ink); }
@@ -328,7 +330,6 @@
       .hero__photo img { max-width: 320px; }
       .about-career-inner { grid-template-columns: 1fr; gap: 48px; }
       .about-career__head { margin-bottom: 0; }
-      .about-career__head .text-h2 { white-space: normal; }
       .ai-central-inner   { grid-template-columns: 1fr; gap: 44px; }
       .comp-grid  { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
