@@ -79,6 +79,10 @@
     img { display: block; }
     :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 3px; }
 
+    /* Block headings in caps; everything else stays lowercase */
+    .text-display, .hero-title, .text-h2,
+    .stat-card__number, .footer-wordmark { text-transform: uppercase; }
+
     /* ══════════════════════════════════════════
        TYPE SCALE — 96 · 64 · 44 · 28 · 22 · 18 · 16 · 14 · 12
     ══════════════════════════════════════════ */
@@ -154,18 +158,19 @@
     /* ══════════════════════════════════════════
        HERO — the forest block
     ══════════════════════════════════════════ */
-    .hero { background: var(--ground); padding: 88px var(--section-padding-x) 0; position: relative; overflow: hidden; }
+    .hero { background: var(--ground); padding: 88px var(--section-padding-x) 104px; position: relative; overflow: hidden; }
     .hero-inner {
       max-width: var(--container-max); margin: 0 auto; width: 100%;
       display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: end;
     }
-    .hero__text { padding-bottom: 104px; }
     .hero__text .text-label { color: var(--on-ground-muted); display: block; margin-bottom: 22px; }
     .hero-title {
-      font-family: var(--font-display); font-size: clamp(48px, 7vw, 88px);
+      font-family: var(--font-display); font-size: clamp(44px, 5.4vw, 80px);
       font-weight: 400; line-height: 1; letter-spacing: -.02em;
       color: var(--on-ground); margin-bottom: 30px;
     }
+    /* One line once there is room for it */
+    @media (min-width: 1024px) { .hero-title { white-space: nowrap; } }
     .hero-tagline {
       font-family: var(--font-body); font-size: 17px; line-height: 1.7;
       color: var(--on-ground-body); max-width: 46ch; margin-bottom: 0;
@@ -350,7 +355,7 @@
     <div class="hero-inner">
       <div class="hero__text">
         <span class="text-label reveal">strategist · operator · builder</span>
-        <h1 class="hero-title reveal reveal-d1">Morgane<br>Marlow</h1>
+        <h1 class="hero-title reveal reveal-d1">Morgane Marlow</h1>
         <p class="hero-tagline reveal reveal-d2">
           i partner with leadership teams to navigate complexity and move priorities forward — especially where policy, partnerships, and cross-border growth intersect. with 8+ years across government, tech-enabled businesses, and regulated industries, i bring structure to ambiguity.
         </p>
