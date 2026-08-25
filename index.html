@@ -187,7 +187,7 @@
     .about-career { background: var(--paper); padding: var(--section-padding-y) var(--section-padding-x); }
     .about-career-inner { max-width: var(--container-max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
     .about-career__bio .text-label { color: var(--muted); display: block; margin-bottom: 16px; }
-    .about-career__bio .text-h3 { color: var(--ink); }
+    .about-career__bio .text-h2 { color: var(--ink); }
     .about-career__bio .text-body { color: var(--ink-mid); max-width: 58ch; }
     .about-career__bio em { font-style: italic; color: var(--ink); }
 
@@ -264,7 +264,7 @@
     .ai-central { background: var(--paper); padding: var(--section-padding-y) var(--section-padding-x); border-top: 1px solid var(--rule); }
     .ai-central-inner { max-width: var(--container-max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
     .ai-central__left .text-label { color: var(--muted); display: block; margin-bottom: 16px; }
-    .ai-central__left .text-h3 { color: var(--ink); }
+    .ai-central__left .text-h2 { color: var(--ink); }
     .ai-central__left .text-body { color: var(--ink-mid); max-width: 42ch; }
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
     .stat-card { background: var(--ground); border-radius: var(--radius-card); padding: 28px 24px; display: flex; flex-direction: column; gap: 6px; }
@@ -280,11 +280,13 @@
     .footer__col a:not(.btn) { display: block; font-size: 14px; color: var(--on-ground-body); margin-bottom: 10px; transition: color .15s; }
     .footer__col a:not(.btn):hover { color: var(--on-ground); }
     .footer-wordmark {
-      font-family: var(--font-display); font-size: clamp(56px, 11vw, 140px); font-weight: 400;
+      font-family: var(--font-display); font-size: clamp(48px, 8.5vw, 112px); font-weight: 400;
       color: var(--on-ground); line-height: .9; letter-spacing: -.03em;
       padding: 0 var(--section-padding-x); white-space: nowrap;
       max-width: calc(var(--container-max) + var(--section-padding-x) * 2); margin: 0 auto;
     }
+    /* The display face is already italic — <em> would add a synthetic slant on top */
+    .footer-wordmark em { font-style: normal; }
     .footer-tagline { font-family: var(--font-body); font-size: 14px; color: var(--on-ground-muted); padding: 0 var(--section-padding-x) 48px; margin: 10px auto 0; display: block; max-width: calc(var(--container-max) + var(--section-padding-x) * 2); text-transform: lowercase; }
     .footer__strip {
       border-top: 1px solid var(--rule-on-ground); color: var(--on-ground-muted);
@@ -326,7 +328,7 @@
       .comp-grid  { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .footer__nav { grid-template-columns: 1fr 1fr; gap: 32px; justify-content: start; }
-      .footer-wordmark { font-size: 15vw; }
+      .footer-wordmark { font-size: 12vw; }
       .footer__strip { flex-direction: column; gap: 8px; text-align: center; }
     }
 
@@ -381,7 +383,7 @@
 
       <div class="about-career__bio reveal">
         <span class="text-label">background</span>
-        <h2 class="text-h3" style="margin-top:16px; margin-bottom:20px;">chief of staff-style strategist &amp; connector.</h2>
+        <h2 class="text-h2" style="margin-top:16px; margin-bottom:24px;">chief of staff-style strategist &amp; connector.</h2>
         <p class="text-body">
           London-based (mostly). 30-something. my career has taken me from financial services in Scottsdale to the halls of Whitehall, from hedge fund operations in Chicago to building a media company from scratch. i've spent time in the places where policy meets business, and i understand how to work both sides.
         </p>
@@ -530,7 +532,7 @@
     <div class="ai-central-inner">
       <div class="ai-central__left reveal">
         <span class="text-label">currently building</span>
-        <h2 class="text-h3" style="margin-top:16px;">AI Central Media</h2>
+        <h2 class="text-h2" style="margin-top:16px;">AI Central Media</h2>
         <p class="text-body" style="margin-top:20px;">
           the leading newsletter and media company covering AI for business leaders and operators. co-founded with Alex Fiore. seed-stage, London-based.
         </p>
