@@ -237,11 +237,13 @@
     ══════════════════════════════════════════ */
     .work-with-me { background: var(--ground); padding: var(--section-padding-y) var(--section-padding-x); }
     .work-with-me-inner { max-width: var(--container-max); margin: 0 auto; }
-    .work-header { max-width: 640px; margin-bottom: 56px; }
+    .work-header { margin-bottom: 56px; }
     .work-header .text-label { color: var(--on-ground-muted); display: block; margin-bottom: 14px; }
     .work-header .text-h2 { color: var(--on-ground); margin-bottom: 18px; }
     .work-header .text-body { color: var(--on-ground-body); }
-    .work-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    /* Byline runs the full container so it lands on one or two tight lines */
+    .work-byline { line-height: 1.4; max-width: 100%; }
+    .work-tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
     .work-tile {
       background: transparent; border: 1px solid var(--tile-border);
       border-radius: var(--radius-card); padding: 34px 30px;
@@ -252,6 +254,12 @@
     .work-tile__num   { font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--on-ground-body); letter-spacing: .1em; }
     .work-tile__title { font-family: var(--font-body); font-size: 19px; font-weight: 500; color: var(--on-ground); }
     .work-tile__desc  { font-family: var(--font-body); font-size: 14px; color: var(--on-ground-body); line-height: 1.65; flex: 1; }
+    .work-tile__meta  {
+      font-family: var(--font-body); font-size: 13px; line-height: 1.6;
+      color: var(--on-ground-muted);
+      border-top: 1px solid var(--rule-on-ground);
+      padding-top: 16px; margin-top: 4px;
+    }
     .work-tile__cta   {
       font-family: var(--font-body); font-size: 13px; font-weight: 600;
       color: var(--on-ground); align-self: flex-start; margin-top: auto;
@@ -260,7 +268,14 @@
       transition: border-color .18s ease;
     }
     .work-tile__cta:hover { border-bottom-color: var(--on-ground); }
-    .work-footer { margin-top: 48px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    /* Third offer, full width across both tiles */
+    .work-extra { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--rule-on-ground); }
+    .work-extra__text {
+      font-family: var(--font-body); font-size: 15px; line-height: 1.7;
+      color: var(--on-ground-body); margin: 0;
+    }
+    .work-extra__text strong { color: var(--on-ground); font-weight: 600; }
+    .work-footer { margin-top: 40px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
     .work-footer-note { font-family: var(--font-body); font-size: 15px; color: var(--on-ground-body); font-style: normal; }
 
     /* ══════════════════════════════════════════
@@ -432,27 +447,26 @@
       <div class="work-header reveal">
         <span class="text-label">opportunities</span>
         <h2 class="text-h2" style="margin-top:12px; margin-bottom:16px;">let's work together.</h2>
-        <p class="text-body">a few ways i currently work with people and organisations. more detail coming — in the meantime, just get in touch.</p>
+        <p class="text-body work-byline">i'm building an independent practice alongside my work at AI Central Media. these are the two ways i'm taking on work at the moment, and i'm glad to talk through anything that sits near them.</p>
       </div>
       <div class="work-tiles">
         <div class="work-tile reveal reveal-d1">
           <div class="work-tile__num">01</div>
-          <h3 class="work-tile__title">advisory &amp; consulting</h3>
-          <p class="work-tile__desc">strategy, growth, cross-border expansion. details coming soon.</p>
+          <h3 class="work-tile__title">UK–US market entry</h3>
+          <p class="work-tile__desc">for companies moving between the UK and the US, in either direction. i spent three years as banking lead at the UK's Department for Business and Trade and 27 years living in the States before that, so i know what the move actually costs in time, regulatory attention, and the people you need in the room.</p>
+          <p class="work-tile__meta">financial services, fintech, professional services · usually six to eight weeks</p>
           <a href="mailto:contact@morganemarlow.com" class="work-tile__cta">let's talk →</a>
         </div>
         <div class="work-tile reveal reveal-d2">
           <div class="work-tile__num">02</div>
-          <h3 class="work-tile__title">speaking</h3>
-          <p class="work-tile__desc">AI, media, operator strategy, building in public. details coming soon.</p>
-          <a href="mailto:contact@morganemarlow.com" class="work-tile__cta">book me →</a>
+          <h3 class="work-tile__title">fractional chief of staff</h3>
+          <p class="work-tile__desc">for founders and executives carrying more than one person reasonably can. i build the operating rhythm, prepare the decisions that genuinely need you, absorb the ones that don't, and keep the important things from quietly slipping while the urgent ones get done.</p>
+          <p class="work-tile__meta">one or two days a week · three months minimum</p>
+          <a href="mailto:contact@morganemarlow.com" class="work-tile__cta">let's talk →</a>
         </div>
-        <div class="work-tile reveal reveal-d3">
-          <div class="work-tile__num">03</div>
-          <h3 class="work-tile__title">partnerships &amp; media</h3>
-          <p class="work-tile__desc">newsletter partnerships and brand collaborations. details coming soon.</p>
-          <a href="mailto:contact@morganemarlow.com" class="work-tile__cta">get in touch →</a>
-        </div>
+      </div>
+      <div class="work-extra reveal">
+        <p class="work-extra__text"><strong>speaking and convening.</strong> panels, roundtables and closed-door sessions on cross-border expansion, financial services, and what running an AI media company looks like from the operations side. most of that experience comes from the government side — trade missions and investor roundtables — and i'd like to do more of it publicly. if you're programming something, i'd love to hear from you.</p>
       </div>
       <div class="work-footer reveal">
         <em class="work-footer-note">not sure which fits? just say hello.</em>
