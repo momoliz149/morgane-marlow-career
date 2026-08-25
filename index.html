@@ -80,7 +80,7 @@
     :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 3px; }
 
     /* Block headings in caps; everything else stays lowercase */
-    .text-display, .hero-title, .text-h2,
+    .text-display, .hero-title, .text-h2, .text-h3,
     .stat-card__number, .footer-wordmark { text-transform: uppercase; }
 
     /* ══════════════════════════════════════════
@@ -88,7 +88,7 @@
     ══════════════════════════════════════════ */
     .text-display { font-family: var(--font-display); font-size: clamp(48px, 7vw, 88px); font-weight: 400; line-height: 1; letter-spacing: -.02em; }
     .text-h2      { font-family: var(--font-display); font-size: clamp(44px, 5vw, 60px); font-weight: 400; line-height: 1.05; }
-    .text-h3      { font-family: var(--font-body); font-size: clamp(22px, 2.4vw, 28px); font-weight: 500; line-height: 1.2; letter-spacing: -.01em; }
+    .text-h3      { font-family: var(--font-body); font-size: clamp(22px, 2.4vw, 28px); font-weight: 500; line-height: 1.25; letter-spacing: .01em; }
     .text-body    { font-family: var(--font-body); font-size: 16px; font-weight: 400; line-height: 1.7; }
     .text-label   { font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: lowercase; }
 
@@ -158,7 +158,7 @@
     /* ══════════════════════════════════════════
        HERO — the forest block
     ══════════════════════════════════════════ */
-    .hero { background: var(--ground); padding: 88px var(--section-padding-x) 104px; position: relative; overflow: hidden; }
+    .hero { background: var(--ground); padding: 72px var(--section-padding-x) 104px; position: relative; overflow: hidden; }
     .hero-inner {
       max-width: var(--container-max); margin: 0 auto; width: 100%;
       display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: end;
@@ -178,7 +178,8 @@
     .hero-tagline + .hero-tagline { margin-top: 18px; }
     .hero__cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px; }
     .hero__photo { display: flex; justify-content: flex-end; align-items: flex-end; }
-    .hero__photo img { width: 100%; max-width: 500px; height: auto; object-fit: contain; object-position: bottom; }
+    /* Square box crops the cutout's empty headroom; she stays full size, bottom-anchored */
+    .hero__photo img { width: 100%; max-width: 500px; aspect-ratio: 1 / 1; height: auto; object-fit: cover; object-position: center bottom; }
 
     /* ══════════════════════════════════════════
        ABOUT & CAREER — paper
